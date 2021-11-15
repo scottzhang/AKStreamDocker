@@ -5,8 +5,11 @@ registry.cn-hangzhou.aliyuncs.com/jgcx/akstream:v2
 避免重复按照.net,mysql,配置3个组件，录像，直接配好了。
 
 mysql:
+
 database:AKStream
+
 username:root
+
 password:AKStream2021@
 
 mysql_data: 就是mysql的数据文件，使用系统产生的配置都保存在这个里面，docker可以rm再run，这个删了就得从头再来了。
@@ -83,11 +86,11 @@ dotnet AKStreamKeeper.dll > /dev/null &
 ```
 
 3. 再启动Web
-···
+```
 cd ~/AKStreameWeb
 
 dotnet AKStreamWeb.dll > /dev/null &
-···
+```
 4. 再启动NVR
 ```
 cd ~/AKStreamNVR
@@ -115,4 +118,14 @@ docker start akstream_dev
 ## 启动组件失败，提示端口占用
 因为这个docker使用的是-net选项，所以直接共享了宿主的网络，可以尝试关闭主机的apache，mysql服务，再尝试启动。
 
+## 使用nvr添加摄像头，视频广场无法看到
+本质是nvr这个程序，那个自动断流选项即使不选，默认值null会被直接存进了数据库，在AKStreamWeb/MediaSerivce里AddVideoChannel处理下就会好，如果不行可以直接进mysql，改VideoChannel表的NoPlayerBreak设置为0，就会好。
+
+## 录像怎么用
+NVR这个使用稍微有点绕，先建recordPlan，名字一定不要太复杂，记住，下面那个周1-7，然后选时间，比较令人困惑，我是周一到周7，每个建一行，时间从今天选到2050年，注意看那个时间框，虽然只是显示时间00:00:00,实际里面是带日期的，所以一定要用他那个控件选，不要手工输入。
+再改摄像头，recordplan字段填上这个，最下面有个自动录像的选项，填上就好了。
+
+
+## 其他问题
+也许你翻翻AKStreamWeb的AutoTask下的文件就可以解答了，这个是个定时任务，其他的基本都是Service。
 
