@@ -1,6 +1,9 @@
 aliyun docker的地址：
-registry.cn-hangzhou.aliyuncs.com/jgcx/akstream:v2
-这个怎么获取还得研究下，应该是把自己的docker registry指向registry.cn-hangzhou.aliyuncs.com,然后就可以pull akstream:v2了。
+先pull下来，再tag下
+```
+docker pull registry.cn-hangzhou.aliyuncs.com/jgcx/akstream:v2
+docker tag registry.cn-hangzhou.aliyuncs.com/jgcx/akstream:v2 akstream:v2
+```
 
 避免重复安装.net,mysql,配置3个组件，录像，直接配好了。
 
