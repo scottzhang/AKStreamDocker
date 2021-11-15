@@ -2,7 +2,7 @@ aliyun docker的地址：
 registry.cn-hangzhou.aliyuncs.com/jgcx/akstream:v2
 这个怎么获取还得研究下，应该是把自己的docker registry指向registry.cn-hangzhou.aliyuncs.com,然后就可以pull akstream:v2了。
 
-避免重复按照.net,mysql,配置3个组件，录像，直接配好了。
+避免重复安装.net,mysql,配置3个组件，录像，直接配好了。
 
 mysql:
 
@@ -13,25 +13,35 @@ username:root
 password:AKStream2021@
 
 mysql_data: 就是mysql的数据文件，使用系统产生的配置都保存在这个里面，docker可以rm再run，这个删了就得从头再来了。
+
 video_record: 保存录像的文件夹。
 
-当前使用的是.net3, 现在因为里面有编译,造成整体偏大，好处是可以修改代码编译.
+当前使用的是.net3, 现在因为里面有编译环境和源文件,造成整体偏大，好处是可以修改代码编译打印日志.
 
 启动方法:
+
 在host机使用root用户
-
+```
 ./prepare.sh
-
+```
 #这个把缺少的dbus权限文件绑定上，我发现在openSUSE上需要做这个，在centos7&8的host机上，最好也执行下，虽然前几行centos本来就是好的。opensuse,centos7,centos8的宿主机测试都是好的。
 ubuntu没测试。
-
+# 创建docker，只需要创建一次
+```
 ./start.sh
-
-#进入docker
-
+```
+# 进入docker
+```
 docker exec -it akstream_dev bash
+```
+# 启动和停止
+```
+docker start akstream_dev
+docker stop akstream_dev
+```
 
 调整配置：
+
 需要根据部署机器的网络地址，调整Keeper和NVR的配置，改以下2个地方：
 
 /root/AKStreamKeeper/Config/AKStreamKeeper.json
