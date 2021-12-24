@@ -1,8 +1,17 @@
 准备工作：
+
 要把本项目先clone到你本地。
+
+```
 git clone https://github.com/scottzhang/AKStreamDocker
+```
+
 然后进入目录：
+
+```
 cd AKStreamDocker
+```
+
 后续要在本目录执行脚本。
 
 aliyun docker的地址：
