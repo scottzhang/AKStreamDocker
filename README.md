@@ -119,7 +119,7 @@ dotnet AKStreamKeeper.dll > /dev/null &
 
 3. 再启动Web
 ```
-cd ~/AKStreameWeb
+cd ~/AKStreamWeb
 
 dotnet AKStreamWeb.dll > /dev/null &
 ```
